@@ -4,91 +4,274 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Katherine | Portafolio</title>
+  <meta name="description" content="Portafolio de Katherine, estudiante de Ingeniería de Software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0f0b1e;
+      --bg-2: #1a1333;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f3effa;
+      --muted: #b4abd0;
+      --accent: #c084fc;
+      --accent-2: #f472b6;
+      --accent-3: #38bdf8;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+    [data-theme="light"] {
+      --bg: #fdf8f3;
+      --bg-2: #f3e8ff;
+      --card: rgba(255, 255, 255, 0.8);
+      --border: rgba(124, 58, 237, 0.18);
+      --text: #2a1f3d;
+      --muted: #6b5b86;
+      --accent: #7c3aed;
+      --accent-2: #db2777;
+      --accent-3: #0284c7;
+      --shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #0d1117;
-      color: #e6edf3;
-      line-height: 1.6;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 15% 10%, var(--bg-2), var(--bg) 55%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.7;
+      transition: background 0.4s, color 0.4s;
     }
-    header {
-      text-align: center;
-      padding: 80px 20px 60px;
-      background: linear-gradient(135deg, #1f3a8a, #7c3aed);
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 6vw;
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
     }
-    header h1 { font-size: 2.6rem; margin-bottom: 10px; }
-    header p { font-size: 1.1rem; opacity: 0.9; }
-    main { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-    section { margin-bottom: 40px; }
-    h2 { color: #58a6ff; margin-bottom: 15px; }
+    .logo { font-weight: 700; font-size: 1.2rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .links { display: flex; gap: 22px; align-items: center; }
+    .links a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
+    .links a:hover { color: var(--accent); }
+    #theme {
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 88vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 60px 6vw;
+    }
+    .avatar {
+      width: 130px; height: 130px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 3.2rem; font-weight: 700; color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 6px var(--card), 0 0 50px rgba(192, 132, 252, 0.45);
+      margin-bottom: 26px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .hello { color: var(--accent); font-family: "Fira Code", monospace; font-size: 0.95rem; margin-bottom: 8px; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1.15; margin-bottom: 14px; }
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p { color: var(--muted); max-width: 560px; font-size: 1.05rem; }
+    .buttons { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: 12px 28px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; box-shadow: 0 8px 22px rgba(192, 132, 252, 0.4); }
+    .btn.ghost { border: 1px solid var(--border); color: var(--text); background: var(--card); }
+
+    /* SECCIONES */
+    main { max-width: 900px; margin: 0 auto; padding: 0 6vw 60px; }
+    section { padding: 50px 0 10px; }
+    h2 { font-size: 1.7rem; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+    h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
     .card {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 12px;
-      padding: 20px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px;
+      backdrop-filter: blur(10px); box-shadow: var(--shadow);
     }
-    .tags span {
-      display: inline-block;
-      background: #1f6feb33;
-      color: #58a6ff;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin: 4px 4px 0 0;
-      font-size: 0.9rem;
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .fact { font-size: 0.95rem; }
+    .fact b { display: block; color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+
+    /* SKILLS */
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      padding: 8px 18px; border-radius: 999px; font-size: 0.9rem; font-weight: 500;
+      background: rgba(192, 132, 252, 0.14); color: var(--accent); border: 1px solid var(--border);
     }
-    ul { padding-left: 20px; }
-    a { color: #58a6ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    footer { text-align: center; padding: 30px; color: #8b949e; font-size: 0.9rem; }
+    .label { font-size: 0.85rem; color: var(--muted); margin: 14px 0 10px; }
+    .label:first-child { margin-top: 0; }
+
+    /* TIMELINE */
+    .timeline { border-left: 2px solid var(--border); padding-left: 26px; display: grid; gap: 22px; }
+    .step { position: relative; }
+    .step::before {
+      content: ""; position: absolute; left: -35px; top: 6px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--bg); border: 3px solid var(--muted);
+    }
+    .step.now::before { border-color: var(--accent-2); background: var(--accent-2); box-shadow: 0 0 14px var(--accent-2); }
+    .step h3 { font-size: 1.02rem; }
+    .step p { color: var(--muted); font-size: 0.9rem; }
+    .badge { font-size: 0.7rem; background: var(--accent-2); color: #fff; padding: 2px 10px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+
+    /* PROYECTOS */
+    .project { text-align: center; border-style: dashed; }
+    .project .icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .project p { color: var(--muted); font-size: 0.92rem; }
+
+    /* CONTACTO */
+    .contact { display: flex; flex-wrap: wrap; gap: 14px; }
+    .contact a {
+      flex: 1; min-width: 220px; text-decoration: none; color: var(--text);
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .contact a:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .contact small { display: block; color: var(--muted); font-size: 0.8rem; }
+
+    footer { text-align: center; padding: 30px 20px 40px; color: var(--muted); font-size: 0.88rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.show { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) { .links a { display: none; } }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Hola, soy Katherine 👋</h1>
-    <p>Estudiante de Ingeniería de Software · Universidad Técnica de Ambato</p>
+  <nav>
+    <div class="logo">Katherine</div>
+    <div class="links">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#aprendiendo">Aprendiendo</a>
+      <a href="#ruta">Ruta</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+      <button id="theme" title="Cambiar tema">🌙</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="avatar">K</div>
+    <div class="hello">&lt;hola mundo /&gt;</div>
+    <h1>Soy <span>Katherine</span></h1>
+    <p>Estudiante de Ingeniería de Software en la Universidad Técnica de Ambato. Estoy dando mis primeros pasos en Java y aprendiendo algo nuevo cada día. ✨</p>
+    <div class="buttons">
+      <a class="btn primary" href="#contacto">Contáctame</a>
+      <a class="btn ghost" href="https://github.com/kmoyolema3929" target="_blank" rel="noopener">Ver mi GitHub</a>
+    </div>
   </header>
 
   <main>
-    <section>
+    <section id="sobre-mi" class="reveal">
       <h2>Sobre mí</h2>
       <div class="card">
-        <p>Soy de Ambato, Ecuador. Estoy empezando mi camino en la programación y me
-        gusta aprender algo nuevo cada día. Actualmente estoy dando mis primeros pasos en Java.</p>
+        <p>Soy de Ambato, Ecuador. Estoy empezando mi camino en la programación y este portafolio es mi bitácora: aquí iré mostrando mis avances y los proyectos que vaya construyendo.</p>
+        <div class="grid" style="margin-top:20px;">
+          <div class="fact"><b>Estudio</b>Ingeniería de Software</div>
+          <div class="fact"><b>Universidad</b>Universidad Técnica de Ambato</div>
+          <div class="fact"><b>Ubicación</b>Ambato, Ecuador 🇪🇨</div>
+          <div class="fact"><b>Dato curioso</b>Amo el olor a libro nuevo 📚</div>
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>Estoy aprendiendo</h2>
-      <div class="card tags">
-        <span>Java</span>
-        <span>Git</span>
-        <span>GitHub</span>
+    <section id="aprendiendo" class="reveal">
+      <h2>Aprendiendo</h2>
+      <div class="card">
+        <p class="label">Lenguaje</p>
+        <div class="chips"><span class="chip">Java</span></div>
+        <p class="label">Herramientas</p>
+        <div class="chips">
+          <span class="chip">Git</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">VS Code</span>
+        </div>
       </div>
     </section>
 
-    <section>
+    <section id="ruta" class="reveal">
+      <h2>Mi ruta de aprendizaje</h2>
+      <div class="card">
+        <div class="timeline">
+          <div class="step now">
+            <h3>Fundamentos de Java <span class="badge">En curso</span></h3>
+            <p>Variables, condicionales y ciclos.</p>
+          </div>
+          <div class="step">
+            <h3>Programación orientada a objetos</h3>
+            <p>Clases, objetos, herencia y encapsulamiento.</p>
+          </div>
+          <div class="step">
+            <h3>Git y GitHub</h3>
+            <p>Control de versiones y trabajo colaborativo.</p>
+          </div>
+          <div class="step">
+            <h3>Mi primer proyecto</h3>
+            <p>Aplicar todo lo aprendido en algo real.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="reveal">
       <h2>Proyectos</h2>
-      <div class="card">
-        <p>Próximamente... ⏳ Aquí irán apareciendo mis proyectos.</p>
+      <div class="card project">
+        <div class="icon">🚧</div>
+        <h3>En construcción</h3>
+        <p>Mis proyectos aparecerán aquí muy pronto. ¡Vuelve a visitarme!</p>
       </div>
     </section>
 
-    <section>
+    <section id="contacto" class="reveal">
       <h2>Contacto</h2>
-      <div class="card">
-        <ul>
-          <li>GitHub: <a href="https://github.com/kmoyolema3929">kmoyolema3929</a></li>
-          <li>Correo: <a href="mailto:kmoyolema3929@gmail.com">kmoyolema3929@gmail.com</a></li>
-        </ul>
+      <div class="contact">
+        <a href="mailto:kmoyolema3929@gmail.com">✉️ Correo<small>kmoyolema3929@gmail.com</small></a>
+        <a href="https://github.com/kmoyolema3929" target="_blank" rel="noopener">💻 GitHub<small>github.com/kmoyolema3929</small></a>
       </div>
     </section>
   </main>
 
-  <footer>
-    Hecho con 💙 por Katherine · Ambato, Ecuador
-  </footer>
+  <footer>Hecho con 💜 por Katherine · Ambato, Ecuador</footer>
 
+  <script>
+    // Cambio de tema
+    const btn = document.getElementById("theme");
+    const root = document.documentElement;
+    let saved = null;
+    try { saved = localStorage.getItem("tema"); } catch (e) {}
+    if (saved === "light") { root.setAttribute("data-theme", "light"); btn.textContent = "☀️"; }
+    btn.addEventListener("click", () => {
+      const light = root.getAttribute("data-theme") === "light";
+      if (light) { root.removeAttribute("data-theme"); btn.textContent = "🌙"; }
+      else { root.setAttribute("data-theme", "light"); btn.textContent = "☀️"; }
+      try { localStorage.setItem("tema", light ? "dark" : "light"); } catch (e) {}
+    });
+
+    // Animación al hacer scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("show"); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
